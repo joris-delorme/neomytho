@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonInteraction, ButtonStyle, TextChannel } from "discord.js";
-import { client } from "./config"
+import { client, config } from "./config"
 import { welcomeMessage } from "./play/welcome-message";
 import { chooseJob } from "./play/choose-job";
 import { jobs } from "./utils/constants";
@@ -12,8 +12,8 @@ let isEnd = false
 client.on('ready', async (c) => {
   console.log(`${c.user.username} bot is ready! 🤖`)
 
-  const channel = client.channels.cache.get("1166388136344027156") as TextChannel
-  if (!channel || !(channel instanceof TextChannel)) return console.log(`Channel id:${1166388136344027156} not found...`)
+  const channel = client.channels.cache.get(config.DISCORD_CHANNEL_ID) as TextChannel
+  if (!channel || !(channel instanceof TextChannel)) return console.log(`Channel id:${config.DISCORD_CHANNEL_ID} not found...`)
   console.log(channel.guild.id)
 
   const reactionWelcomeMsg = await (await welcomeMessage(channel)).awaitMessageComponent() as ButtonInteraction
